@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>HTML5 Canvas</h1>
+
+<canvas id="myCanvas" width="1280" height="720" style="border:1px solid #000000;"></canvas>
+<script>
+  // Get the canvas element
+  var canvas = document.getElementById("myCanvas");
+
+  // Get the 2D rendering context
+  var context = canvas.getContext("2d");
+
+  // Set the fill color to black
+  context.fillStyle = "#000000";
+
+  // Fill the entire canvas with black
+  context.fillRect(0, 0, canvas.width, canvas.height);
+</script>
+</body>
+</html>
