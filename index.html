@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <head>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
   <meta charset="UTF-8">
     <meta name="viewport",
           content="width=device-width, initial-scale=1.0">
-    <title>Snake Game with GFG</title>
+    <title>Museum Snake</title>
 </head>
 <html>
 <body>
@@ -13,19 +12,9 @@
   <div class="snakegame">Museum Snake</div>
 </h1>
 
-<canvas id="myCanvas" width="1280" height="720" style="border:1px solid #000000;"></canvas>
+<canvas id="gameCanvas" width="1280" height="720"></canvas>
+<script src="script.js"></script>
 <script>
-  // Get the canvas element
-  var canvas = document.getElementById("myCanvas");
-
-  // Get the 2D rendering context
-  var context = canvas.getContext("2d");
-
-  // Set the fill color to black
-  context.fillStyle = "#000000";
-
-  // Fill the entire canvas with black
-  context.fillRect(0, 0, canvas.width, canvas.height);
 
   
 

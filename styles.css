@@ -1,11 +1,18 @@
-body {
-    background-color:orange;
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
-    text-align: center;
-}
 
 .snakegame {
     font-size: 40px;
     font-weight: bold;
     color: green;
+}
+
+canvas {
+    border: 1px solid black;
+    display: block;
+    margin: 0 auto;
+}
+
+body {
+    background-color:orange;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    text-align: center;
 }
