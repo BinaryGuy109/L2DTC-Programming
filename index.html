@@ -12,13 +12,13 @@
   <div class="snakegame">Museum Snake</div>
 </h1>
 
-<canvas id="gameCanvas" width="1280" height="720"></canvas>
+<canvas id="gameCanvas" width="1280" height="720" style="border:10px solid red"></canvas>
 <script src="script.js"></script>
 <script>
-
-  
-
-
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "blue";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 </script>
 </body>
 </html>
