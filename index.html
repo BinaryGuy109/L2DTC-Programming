@@ -8,12 +8,7 @@
 </head>
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Basic Snake HTML Game</title>
-  <meta charset="UTF-8">
-</head>
-<body>
-<canvas width="400" height="400" id="game"></canvas>
+<canvas width="800" height="800" id="game"></canvas>
 <script>
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
@@ -89,11 +84,11 @@ function loop() {
   }
 
   // draw apple
-  context.fillStyle = 'red';
+  context.fillStyle = '#DDD7CC';
   context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
   // draw snake one cell at a time
-  context.fillStyle = 'green';
+  context.fillStyle = '#723939';
   snake.cells.forEach(function(cell, index) {
 
     // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
