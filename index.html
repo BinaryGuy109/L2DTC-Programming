@@ -45,9 +45,9 @@
       requestAnimationFrame(loop);
 
       // Initialize the snake's cells (if not done already)
-      if (!snake.cells.length) {
-        snake.cells.push({ x: snake.x, y: snake.y });
-      }
+      // if (!snake.cells.length) {
+      //   snake.cells.push({ x: snake.x, y: snake.y });
+      // }
 
       count = 0;
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -89,7 +89,7 @@
           context.drawImage(snakeHeadImg, cell.x, cell.y, grid, grid);
         } else {
           // Draw the snake body for the rest of the cells
-          // context.drawImage(snakeBodyImg, cell.x, cell.y, grid, grid);
+          context.drawImage(snakeBodyImg, cell.x, cell.y, grid, grid);
         }
 
         // snake ate apple
