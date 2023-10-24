@@ -105,9 +105,7 @@
         for (var i = index + 1; i < snake.cells.length; i++) {
           // snake occupies the same space as a body part. reset game
           if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-            // Game over logic here
-            // You can display a game over message and reset the game
-            // For example:
+            // Game logic
             alert('Game Over! Your score: ' + (snake.maxCells - 4));
             snake.x = 160;
             snake.y = 160;
