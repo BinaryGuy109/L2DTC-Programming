@@ -10,6 +10,7 @@
   <canvas width="800" height="800" id="game"></canvas>
   <img src="images/snake.png" id="snake-head" style="display: none;">
   <img src="images/snakebody.png" id="snake-body" style="display: none;">
+  <img src="images/apple.png" id="apple" style="display: none;">
   <script>
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
@@ -17,6 +18,7 @@
     // Load the images for the snake head and body
     var snakeHeadImg = document.getElementById('snake-head');
     var snakeBodyImg = document.getElementById('snake-body');
+    var appleImg = document.getElementById('apple');
 
     var grid = 16;
     var count = 0;
@@ -32,7 +34,11 @@
 
     var apple = {
       x: 320,
-      y: 320
+      y: 320,
+      dx: grid,
+      dy: 0,
+      cells: [],
+      maxCells: 1
     };
 
     var frameRate = 25; //speed control
@@ -80,6 +86,7 @@
           } else {
             context.drawImage(snakeBodyImg, cell.x, cell.y, grid, grid);
           }
+          context.drawImage(appleImg, apple.x, apple.y, grid, grid);
 
           if (cell.x === apple.x && cell.y === apple.y) {
             snake.maxCells++;
