@@ -10,12 +10,13 @@
   <canvas width="800" height="800" id="game"></canvas>
   <img src="images/snake.png" id="snake-head" style="display: none;">
   <img src="images/snakebody.png" id="snake-body" style="display: none;">
-  <img src="images/apple.png" id="apple" style="display: none;">
+  <img src="images/apple.png" id="apple" style="display: none;"> <!-- Add the apple image -->
+  <div id="score" style="font-size: 48px">Score: 0</div> <!-- Add the score display -->
   <script>
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
-    
-    // Load the images for the snake head and body
+
+    // Load the images for the snake head, body, and apple
     var snakeHeadImg = document.getElementById('snake-head');
     var snakeBodyImg = document.getElementById('snake-body');
     var appleImg = document.getElementById('apple');
@@ -34,14 +35,11 @@
 
     var apple = {
       x: 320,
-      y: 320,
-      dx: grid,
-      dy: 0,
-      cells: [],
-      maxCells: 1
+      y: 320
     };
 
-    var frameRate = 25; //speed control
+    var frameRate = 20;
+    var score = 0; // Initialize the score variable
 
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
@@ -50,8 +48,6 @@
     function loop() {
       setTimeout(function() {
         requestAnimationFrame(loop);
-
-        // Rest of your game logic goes here
 
         count = 0;
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -77,18 +73,19 @@
           snake.cells.pop();
         }
 
-        context.fillStyle = '#DDD7CC';
-        context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+        context.drawImage(appleImg, apple.x, apple.y, grid, grid); // Draw the apple
 
-        snake.cells.forEach(function (cell, index) {
+        snake.cells.forEach(function(cell, index) {
           if (index === 0) {
             context.drawImage(snakeHeadImg, cell.x, cell.y, grid, grid);
           } else {
             context.drawImage(snakeBodyImg, cell.x, cell.y, grid, grid);
           }
-          context.drawImage(appleImg, apple.x, apple.y, grid, grid);
 
           if (cell.x === apple.x && cell.y === apple.y) {
+            score++; // Increase the score
+            document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
+
             snake.maxCells++;
             apple.x = getRandomInt(0, 25) * grid;
             apple.y = getRandomInt(0, 25) * grid;
@@ -96,7 +93,7 @@
 
           for (var i = index + 1; i < snake.cells.length; i++) {
             if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-              alert('Game Over! Your score: ' + (snake.maxCells - 4));
+              alert('Game Over! Your score: ' + score);
               snake.x = 160;
               snake.y = 160;
               snake.cells = [];
@@ -105,13 +102,15 @@
               snake.dy = 0;
               apple.x = getRandomInt(0, 25) * grid;
               apple.y = getRandomInt(0, 25) * grid;
+              score = 0; // Reset the score
+              document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
             }
           }
         });
-      }, 1000 / frameRate); // Adjust the frame rate here
+      }, 1000 / frameRate);
     }
 
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', function(e) {
       if (e.which === 37 && snake.dx === 0) {
         snake.dx = -grid;
         snake.dy = 0;
