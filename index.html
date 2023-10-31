@@ -24,8 +24,6 @@
     var snakeBodyImg = document.getElementById('snake-body');
     var appleImg = document.getElementById('apple');
 
-    
-
     var grid = 20;
     var count = 0;
 
@@ -43,25 +41,26 @@
       y: 320
     };
 
+    // Danger cell object
     var dangerCell = {
       x: 0,
       y: 0,
     };
 
+    // Function to place the danger cell in a random position
     function placeDangerCell() {
-      dangerCell.x = getRandomInt(0,25) * grid;
-      dangerCell.y = GetRandomInt(0, 25) * grid;
+      dangerCell.x = getRandomInt(0, 25) * grid;
+      dangerCell.y = getRandomInt(0, 25) * grid;
     }
-    
 
-    var frameRate = 20; //speed of the snake
+    var frameRate = 20; // Speed of the snake
     var score = 0; // Initialize the score variable
-
 
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
 
+    // Initial placement of danger cell
     placeDangerCell();
 
     function loop() {
@@ -92,11 +91,11 @@
           snake.cells.pop();
         }
 
-        
-
-        
-
         context.drawImage(appleImg, apple.x, apple.y, grid, grid); // Draw the apple
+
+        // Draw the danger cell
+        context.fillStyle = "red"; // Use a red square as the danger cell
+        context.fillRect(dangerCell.x, dangerCell.y, grid, grid);
 
         snake.cells.forEach(function(cell, index) {
           if (index === 0) {
@@ -109,35 +108,36 @@
             score++; // Increase the score
             document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
 
-              // Play the sound when the snake eats an apple
-  var eatSound = document.getElementById('eatSound');
-  eatSound.play();
+            // Play the sound when the snake eats an apple
+            var eatSound = document.getElementById('eatSound');
+            eatSound.play();
 
             snake.maxCells++;
             apple.x = getRandomInt(0, 25) * grid;
             apple.y = getRandomInt(0, 25) * grid;
+
+            // Place a new danger cell
+            placeDangerCell();
           }
 
-          for (var i = index + 1; i < snake.cells.length; i++) {
-            if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-              alert('Game Over! Your score: ' + score);
-              snake.x = 160;
-              snake.y = 160;
-              snake.cells = [];
-              snake.maxCells = 4;
-              snake.dx = grid;
-              snake.dy = 0;
-              apple.x = getRandomInt(0, 25) * grid;
-              apple.y = getRandomInt(0, 25) * grid;
-              score = 0; // Reset the score
-              document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
-            }
+          // Collision detection with danger cell
+          if (cell.x === dangerCell.x && cell.y === dangerCell.y) {
+            alert('Game Over! Your score: ' + score);
+            snake.x = 160;
+            snake.y = 160;
+            snake.cells = [];
+            snake.maxCells = 4;
+            snake.dx = grid;
+            snake.dy = 0;
+            apple.x = getRandomInt(0, 25) * grid;
+            apple.y = getRandomInt(0, 25) * grid;
+            score = 0; // Reset the score
+            document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
+            placeDangerCell(); // Place a new danger cell
           }
         });
       }, 1000 / frameRate);
     }
-
-    
 
     document.addEventListener('keydown', function(e) {
       if (e.which === 37 && snake.dx === 0) {
@@ -154,9 +154,6 @@
         snake.dx = 0;
       }
     });
-    
-
- 
 
     requestAnimationFrame(loop);
   </script>
