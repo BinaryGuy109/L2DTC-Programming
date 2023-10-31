@@ -36,22 +36,12 @@
       maxCells: 4
     };
 
-    var apple = {
+    var apples = [{
       x: 320,
       y: 320
-    };
+    }];
 
-    // Danger cell object
-    var dangerCell = {
-      x: 0,
-      y: 0,
-    };
-
-    // Function to place the danger cell in a random position
-    function placeDangerCell() {
-      dangerCell.x = getRandomInt(0, 25) * grid;
-      dangerCell.y = getRandomInt(0, 25) * grid;
-    }
+    var dangerCells = [];
 
     var frameRate = 20; // Speed of the snake
     var score = 0; // Initialize the score variable
@@ -60,8 +50,19 @@
       return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    // Initial placement of danger cell
-    placeDangerCell();
+    // Function to place a new danger cell
+    function placeDangerCell() {
+      var newDangerCell = {
+        x: getRandomInt(0, 25) * grid,
+        y: getRandomInt(0, 25) * grid,
+      };
+      dangerCells.push(newDangerCell);
+    }
+
+    // Initial placement of danger cells
+    for (var i = 0; i < 3; i++) {
+      placeDangerCell();
+    }
 
     function loop() {
       setTimeout(function() {
@@ -91,11 +92,7 @@
           snake.cells.pop();
         }
 
-        context.drawImage(appleImg, apple.x, apple.y, grid, grid); // Draw the apple
-
-        // Draw the danger cell
-        context.fillStyle = "red"; // Use a red square as the danger cell
-        context.fillRect(dangerCell.x, dangerCell.y, grid, grid);
+        context.drawImage(appleImg, apples[0].x, apples[0].y, grid, grid); // Draw the apple
 
         snake.cells.forEach(function(cell, index) {
           if (index === 0) {
@@ -104,7 +101,7 @@
             context.drawImage(snakeBodyImg, cell.x, cell.y, grid, grid);
           }
 
-          if (cell.x === apple.x && cell.y === apple.y) {
+          if (cell.x === apples[0].x && cell.y === apples[0].y) {
             score++; // Increase the score
             document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
 
@@ -113,15 +110,20 @@
             eatSound.play();
 
             snake.maxCells++;
-            apple.x = getRandomInt(0, 25) * grid;
-            apple.y = getRandomInt(0, 25) * grid;
+            apples[0].x = getRandomInt(0, 25) * grid;
+            apples[0].y = getRandomInt(0, 25) * grid;
 
             // Place a new danger cell
             placeDangerCell();
           }
+        });
 
-          // Collision detection with danger cell
-          if (cell.x === dangerCell.x && cell.y === dangerCell.y) {
+        // Draw and check collisions with danger cells
+        for (var i = 0; i < dangerCells.length; i++) {
+          context.fillStyle = "red"; // Use a red square as the danger cell
+          context.fillRect(dangerCells[i].x, dangerCells[i].y, grid, grid);
+
+          if (snake.x === dangerCells[i].x && snake.y === dangerCells[i].y) {
             alert('Game Over! Your score: ' + score);
             snake.x = 160;
             snake.y = 160;
@@ -129,13 +131,16 @@
             snake.maxCells = 4;
             snake.dx = grid;
             snake.dy = 0;
-            apple.x = getRandomInt(0, 25) * grid;
-            apple.y = getRandomInt(0, 25) * grid;
+            apples[0].x = getRandomInt(0, 25) * grid;
+            apples[0].y = getRandomInt(0, 25) * grid;
             score = 0; // Reset the score
             document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
-            placeDangerCell(); // Place a new danger cell
+            dangerCells = [];
+            for (var j = 0; j < 3; j++) {
+              placeDangerCell();
+            }
           }
-        });
+        }
       }, 1000 / frameRate);
     }
 
