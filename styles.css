@@ -27,7 +27,7 @@ html, body {
   }
 
   body {
-    background: #968979;
+    background-image: url('images/background.png');
     display: flex;
     align-items: center;
     justify-content: center;
