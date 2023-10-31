@@ -38,7 +38,7 @@
       y: 320
     };
 
-    var frameRate = 20;
+    var frameRate = 20; //speed of the snake
     var score = 0; // Initialize the score variable
 
     function getRandomInt(min, max) {
@@ -128,5 +128,14 @@
 
     requestAnimationFrame(loop);
   </script>
+  <style>
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 48px;
+    }
+  </style>
 </body>
 </html>
