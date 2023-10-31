@@ -12,6 +12,9 @@
   <img src="images/snakebody.png" id="snake-body" style="display: none;">
   <img src="images/apple.png" id="apple" style="display: none;"> <!-- Add the apple image -->
   <div id="score" style="font-size: 48px">Score: 0</div> <!-- Add the score display -->
+  <audio id="eatSound" preload="auto">
+    <source src="blop2.mp3" type="audio/mpeg">
+  </audio>
   <script>
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
@@ -20,6 +23,8 @@
     var snakeHeadImg = document.getElementById('snake-head');
     var snakeBodyImg = document.getElementById('snake-body');
     var appleImg = document.getElementById('apple');
+
+    
 
     var grid = 20;
     var count = 0;
@@ -40,6 +45,7 @@
 
     var frameRate = 20; //speed of the snake
     var score = 0; // Initialize the score variable
+
 
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
@@ -73,6 +79,10 @@
           snake.cells.pop();
         }
 
+        
+
+        
+
         context.drawImage(appleImg, apple.x, apple.y, grid, grid); // Draw the apple
 
         snake.cells.forEach(function(cell, index) {
@@ -85,6 +95,10 @@
           if (cell.x === apple.x && cell.y === apple.y) {
             score++; // Increase the score
             document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
+
+              // Play the sound when the snake eats an apple
+  var eatSound = document.getElementById('eatSound');
+  eatSound.play();
 
             snake.maxCells++;
             apple.x = getRandomInt(0, 25) * grid;
@@ -110,6 +124,8 @@
       }, 1000 / frameRate);
     }
 
+    
+
     document.addEventListener('keydown', function(e) {
       if (e.which === 37 && snake.dx === 0) {
         snake.dx = -grid;
@@ -125,6 +141,9 @@
         snake.dx = 0;
       }
     });
+    
+
+ 
 
     requestAnimationFrame(loop);
   </script>
