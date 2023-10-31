@@ -46,7 +46,13 @@
     var dangerCell = {
       x: 0,
       y: 0,
+    };
+
+    function placeDangerCell() {
+      dangerCell.x = getRandomInt(0,25) * grid;
+      dangerCell.y = GetRandomInt(0, 25) * grid;
     }
+    
 
     var frameRate = 20; //speed of the snake
     var score = 0; // Initialize the score variable
@@ -55,6 +61,8 @@
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    placeDangerCell();
 
     function loop() {
       setTimeout(function() {
