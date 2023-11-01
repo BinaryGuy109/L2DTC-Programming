@@ -95,6 +95,26 @@
 
         snake.cells.unshift({ x: snake.x, y: snake.y });
 
+        for (var i = 1; i < snake.cells.length; i++) {
+      if (snake.cells[i].x === snake.x && snake.cells[i].y === snake.y) {
+        alert('Game Over! Your score: ' + score);
+        snake.x = 160;
+        snake.y = 160;
+        snake.cells = [];
+        snake.maxCells = 4;
+        snake.dx = grid;
+        snake.dy = 0;
+        apples[0].x = getRandomInt(0, 25) * grid;
+        apples[0].y = getRandomInt(0, 25) * grid;
+        score = 0; // Reset the score
+        document.getElementById('score').innerHTML = 'Score: ' + score; // Update the displayed score
+        dangerCells = [];
+        for (var j = 0; j < 3; j++) {
+          placeDangerCell();
+        }
+      }
+    }
+
         if (snake.cells.length > snake.maxCells) {
           snake.cells.pop();
         }
@@ -150,6 +170,8 @@
         }
       }, 1000 / frameRate);
     } 
+
+
 
     document.addEventListener('keydown', function(e) {
       if (e.which === 37 && snake.dx === 0) {
