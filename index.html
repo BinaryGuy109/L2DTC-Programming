@@ -15,14 +15,14 @@
   <audio id="eatSound" preload="auto">
     <source src="blop2.mp3" type="audio/mpeg">
   </audio>
-  <div id="instructions">
+  <div id="instructions" class="hidden">
     <h3>How To Play</h3>
-    <p>Use arrow keys to control the rugby ball.</p>
-    <p>Collect the books to increase your score that contain SBHS's History</p>
-    <p>Avoid colliding with the speed trail.</p>
-    <p>Avoid colliding with the flames, you don't want to lose the history!</p>
+    <p><b>Use arrow keys to control the rugby ball.</b></p>
+    <p><b>Collect the books to increase your score that contain SBHS's History</b></p>
+    <p><b>Avoid colliding with the speed trail.</b></p>
+    <p><b>Avoid colliding with the flames, you don't want to lose the history!</b></p>
   </div>
-  <div id="imageParagraphSection">
+  <div id="imageParagraphSection" class="hidden">
     <div class="image-paragraph">
       <img src="images/snake.png" alt="Image 1">
       <p><b>This is the ball, make sure to gather books and avoid the flames with this.</b></p>
@@ -216,7 +216,7 @@
         snake.dx = 0;
       }
     });
-
+    
     requestAnimationFrame(loop);
   </script>
 </body>

@@ -53,3 +53,17 @@
 //     }
 // });
 
+document.getElementById('hideSectionsButton').addEventListener('click', function() {
+    var instructionsSection = document.getElementById('instructions');
+    var imageGridSection = document.getElementById('imageGrid');
+  
+    if (instructionsSection.classList.contains('hidden')) {
+      // If the sections are currently hidden, show them
+      instructionsSection.classList.remove('hidden');
+      imageGridSection.classList.remove('hidden');
+    } else {
+      // If the sections are currently visible, hide them
+      instructionsSection.classList.add('hidden');
+      imageGridSection.classList.add('hidden');
+    }
+  });
