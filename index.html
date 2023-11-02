@@ -17,10 +17,28 @@
   </audio>
   <div id="instructions">
     <h3>How To Play</h3>
-    <p>Use arrow keys to control the snake.</p>
-    <p>Eat apples to increase your score.</p>
-    <p>Avoid colliding with the snake's body.</p>
-    <p>Avoid colliding with the danger apples</p>
+    <p>Use arrow keys to control the rugby ball.</p>
+    <p>Collect the books to increase your score that contain SBHS's History</p>
+    <p>Avoid colliding with the speed trail.</p>
+    <p>Avoid colliding with the flames, you don't want to lose the history!</p>
+  </div>
+  <div id="imageParagraphSection">
+    <div class="image-paragraph">
+      <img src="images/snake.png" alt="Image 1">
+      <p><b>This is the ball, make sure to gather books and avoid the flames with this.</b></p>
+    </div>
+    <div class="image-paragraph">
+      <img src="images/snakebody.png" alt="Image 2">
+      <p><b>This is the speed trail that you leave behind, touch it and you stop the ball!</b></p>
+    </div>
+    <div class="image-paragraph">
+      <img src="images/apple.png" alt="Image 3">
+      <p><b>Books that contain knowledge about SBHS's History!</b></p>
+    </div>
+    <div class="image-paragraph">
+      <img src="images/snake.png" alt="Image 4">
+      <p><b>These flames will make you lose and burn SBHS's history records!</b></p>
+    </div>
   </div>
   <script>
     var canvas = document.getElementById('game');
@@ -59,12 +77,22 @@
 
     // Function to place a new danger cell
     function placeDangerCell() {
-      var newDangerCell = {
-        x: getRandomInt(0, 35) * grid,
-        y: getRandomInt(0, 35) * grid,
-      };
-      dangerCells.push(newDangerCell);
-    }
+  var minDistance = 3; // Minimum distance in grid units between player and danger cell
+
+  var newDangerCell;
+  do {
+    newDangerCell = {
+      x: getRandomInt(0, 35) * grid,
+      y: getRandomInt(0, 35) * grid,
+    };
+  } while (
+    // Check if the new danger cell is too close to the player
+    (Math.abs(newDangerCell.x - snake.x) < minDistance * grid ||
+      Math.abs(newDangerCell.y - snake.y) < minDistance * grid)
+  );
+
+  dangerCells.push(newDangerCell);
+}
 
     // Initial placement of danger cells
     for (var i = 0; i < 3; i++) {
