@@ -106,6 +106,31 @@
         return Math.floor(Math.random() * (max - min)) + min;
       }
 
+      // Function to place a new apple on the canvas
+      function placeApple() {
+        var newApple;
+
+        do {
+          newApple = {
+            x: getRandomInt(0, 35) * grid,
+            y: getRandomInt(0, 35) * grid,
+          };
+          // Ensure that the new apple does not overlap with snake cells or danger cells
+        } while (
+          snake.cells.some(
+            (cell) => cell.x === newApple.x && cell.y === newApple.y
+          ) ||
+          dangerCells.some(
+            (cell) => cell.x === newApple.x && cell.y === newApple.y
+          )
+        );
+
+        apples[0] = newApple; // Update the apple's position in the apples array
+      }
+
+      // Inside your code where the apple placement logic is called, replace the existing placement logic with:
+      placeApple();
+
       // Function to place a new danger cell
       function placeDangerCell() {
         var minDistance = 3; // Minimum distance in grid units between player and danger cell
